@@ -12,9 +12,8 @@ WORKDIR /macaddress.inbrowser.app
 COPY --from=base /git/macaddress.inbrowser.app .
 RUN npm install --global pnpm && \
     pnpm install && \
-    pnpm run build
+    pnpm build
 
-FROM pierrezemb/gostatic
+FROM lipanski/docker-static-website
 
-COPY --from=build /macaddress.inbrowser.app/dist /srv/http
-EXPOSE 8043
+COPY --from=build /macaddress.inbrowser.app/dist .
